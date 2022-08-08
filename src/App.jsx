@@ -32,7 +32,7 @@ useEffect( () => {
   return (
     <div className="App">
       <Button label="Click Me" handleClick={() => onButtonClick()}/>
-      <InputField label='User name' val={ userName } onChange ={onUserNameChange}/>
+      <InputField label='User name' val={ userName } onchange ={onUserNameChange}/>
       {/* {userName} */}
       {/* <TextField label={userName}/>  */}
       <TextField label={displayName}/>

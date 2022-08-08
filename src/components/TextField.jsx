@@ -1,8 +1,19 @@
 const TextField = (props) => { 
-    const {label} =  props;
+    const {label, text} =  props;
     return (
         
-        <div > {label}</div>
+        // <div classname="labeldiv"> {label} </div>
+
+        <div className="boxdetail">
+            
+        <label className="label1"> { label }</label> <br/>
+        <label className="label2"> { text } </label> 
+       
+        
+                
+
+    </div>
+
     );
     /*const { label, handleClick } = props;
     return (

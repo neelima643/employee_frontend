@@ -1,19 +1,23 @@
 const InputSelect = ({
     label,
-    options
+    options,
+    onchange
 }) => {
     
    
     return (
-        
-            <select name={label}>
+        <div className="box">
+            <label> {label } </label>
+            <select name={label} onClick= { (event) => onchange(event.target.value)}>
                 {options.map((item) => (
                     
               <option value={item.key}>{item.val}</option>
             ))}
 
-console.log(item);
+
             </select>
+        </div>
+            
       
     )
 }

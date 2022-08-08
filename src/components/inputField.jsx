@@ -1,24 +1,19 @@
 const InputField= ({
     label,
-    onChange,
+    onchange,
     fieldValue,
-    placeHolder
+    placeHolder,
+    type = 'text',
+    className = 'text',
+    divname
 }) => {
     return (
     
-        <div>
+        <div className={divname}>
             
-            <input type="text" 
-             
-            onChange={(event) => onChange(event.target.value)}
-            
-            value={ fieldValue } 
-            placeholder={placeHolder}
-            />
-           
-            
-                    
-
+            <label> { label }</label>
+            <input type={type} className={className} onChange = {(event) => onchange(event.target.value)} value={ fieldValue } placeholder={placeHolder} />
+      
         </div>
 
         

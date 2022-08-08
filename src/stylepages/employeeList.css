@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito Sans');
+
+table{
+    border-spacing: 100px 0;
+    border-collapse:separate;
+    border-spacing:0 15px;
+    margin: 20px 24px 26px 0px;
+    font-family: Nunito Sans , sans-serif;
+    font-size: 15px;
+} 
+
+
+
+tr {
+    height: 58px;
+    box-shadow: 0px 3px 6px #00000029;
+    opacity: 1;
+    background-color: #FDFDFD;
+    margin: 20px 24px 26px 0px;
+    /* padding: 30px 20px 27px 20px; */
+    padding: 50px 50px 57px 20px;
+
+    
+}
+
+
+.filterby {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 18px;
+    font-weight: normal;
+    
+}
+
+.status1 {
+    background-color: #EAF9FF;
+    height: 30px;
+    font-size: 18px;
+    font-weight: normal;
+    margin-top: 10px;
+    padding: 0px 20px 5px 20px;
+    border-radius: 50px 50px 50px 50px;
+    position: absolute;
+    right: 350px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 8%;
+}
+
+.filter {
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    right: 500px;
+    margin-top: 10px;
+    
+}
+.list {
+    width: 60%;
+}
+
+.create {
+    width: 15%;
+    font-size: 18px;
+    font-weight: normal;
+    background-color: #EAF9FF;
+    border-radius: 50px 50px 50px 50px;
+    align-items: center;
+    text-align: center;
+    padding: 15px 0px 0px 0px;
+    height: 48px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    right: 50px;
+}
+
+
+.head1 {
+    background-color: #EAF9FF;
+}
+
+td {
+
+    width: 14.28%;
+    text-align: center;
+    border-right:hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.Active {
+    background-color: #D3F4BE;
+    height: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding: 5px 5px 15px 5px;
+    border-radius: 50px 50px 50px 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.Probation {
+    background-color: #F5ECB8;
+    height: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding: 5px 5px 15px 5px;
+    border-radius: 50px 50px 50px 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+
+}
+
+.Inactive {
+    background-color: #FFBFBF;
+    height: 30px;
+    margin-left: 60px;
+    margin-right: 60px;
+    padding: 5px 5px 15px 5px;
+    border-radius: 50px 50px 50px 50px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+.plusbtn {
+    border-radius: 100%;
+    background-color: #03AEEE;
+    height: 48px;
+    width: 48px;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    text-align: center;
+    color: #ffffff;
+    font-size: 20px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.emp {
+    margin-left: 70px;
+    margin-bottom: 10px;
+}
+
+.abc {
+    height: 20px;
+    color: #03AEEE;
+}
+
+icon {
+    color: aqua;
+}

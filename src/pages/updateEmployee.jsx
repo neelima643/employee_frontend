@@ -5,47 +5,75 @@ import { useEffect, useState } from 'react';
 import '../stylepages/createEmployee.css';
 import Navbar from '../components/navbar';
 import kv_logo from '../images/kv_logo.png';
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
-import { useCreateEmployeeMutation } from '../services/baseapi';
+import { useParams } from 'react-router-dom';
+import { useGetEmployeeQuery } from '../services/baseapi'; 
+import { useUpdateEmployeeMutation, useGetEmployeeByIdQuery  } from "../services/baseapi";
 import { useNavigate } from 'react-router-dom';
 //import Nunito Sans from 'https://fonts.googleapis.com/css?family=Nunito Sans';
 
-const CreateEmployee = () => {
-    const [state, setState] = useState({
-        empname: "",
-        empid: "",
-        empdate: "",
-        emprole: "",
-        empstatus: "",
-        empexp: "",
-        empaddress1: "",
-        empaddress2: "",
-        city: "",
-        state: "",
-        country: "",
-        zipcode: "",
 
-    });
+const UpdateEmployee = () => {
+    
+        const [state, setState] = useState({
+            name: "",
+            id: "",
+            join_date: "",
+            role: "",
+            status: "",
+            experience: "",
+            addresslane1: "",
+            addresslane2: "",
+            city: "",
+            state: "",
+            country: "",
+            pincode: "",
+    
+        });
 
-  
-   
-      const navigate = useNavigate();
+        console.log("state is: " ,state);
+
+        const navigate = useNavigate();
     const goToNextPage= (url) => {
         navigate(url);
     }
+    
+        let { id } = useParams();
+        console.log(id);
+    
+        
+    const { data: empdetails, error, isLoading } = useGetEmployeeByIdQuery(id);
+    console.log(empdetails);
 
-    const [createEmp, result] = useCreateEmployeeMutation('employee');
+    const [updateEmp, result] = useUpdateEmployeeMutation(id);
     console.log(result);
+    
 
 
     useEffect( () => {
+        if(empdetails?.data) {
+            setState({
+                ...empdetails.data,
+                addressLane1: empdetails.data.address.addressLane1,
+                addressLane2: empdetails.data.address.addressLane2,
+                city: empdetails.data.address.city,
+                state: empdetails.data.address.state,
+                country: empdetails.data.address.country,
+                pincode: empdetails.data.address.pincode,
+            });
+        }
+        
+      
+      }, [empdetails]);
+
+      useEffect( () => {
         if(result.isSuccess) {
             goToNextPage('/list')
         }
       
       }, [result]);
 
-    const roleSelection = [
+    
+      const roleSelection = [
         {key: 'Admin', val: 'Admin'},
         {key: 'SuperAdmin', val: 'SuperAdmin'},
         {key: 'Trainee', val: 'Trainee'}
@@ -69,19 +97,19 @@ const CreateEmployee = () => {
         <body className="body1">
             
             <header>
-                <img className="key" src={ kv_logo }/>
-            </header>
+                        <img className="key" src={ kv_logo }/>
+                </header>
             <div className="maindiv">
             
             <Navbar/>
         <main>
-        <div className="div1" >Create Employee</div>
+        <div className="div1">Update Employee</div>
             <div className="formdiv" name="empform">
                         
                             {/* <label for="empname">Employee Name</label><br/>
                             <input className="text" type="text" id="empnam" placeholder="Employee Name"/> */}
                             {/* <TextField label={'Employee Name'}/> */}
-                            <InputField divname="box" type="text" fieldValue={state.empname} id="empname" placeHolder={"Employee Name"} label={"Employee name"} onchange ={(value) => onChangeValue("empname", value)} />
+                            <InputField divname="box" type="text" fieldValue={state.name} id="empname" placeHolder={"Employee Name"} label={"Employee name"} onchange ={(value) => onChangeValue("name", value)} />
                         
                         
                             {/* <label for="empid">Employee Id</label><br/>
@@ -93,9 +121,9 @@ const CreateEmployee = () => {
                             {/* <label for="join">Joining Date</label><br/>
                             <input className="text" type="text" id="join" placeholder="Joining Date"/> */}
                      
-                            <InputField divname="box" type="text" className="text" fieldValue={state.empdate} id="empdate" placeHolder={"Joining Date"} label={"joining Date"} onchange ={(value) => onChangeValue("empdate", value)} />
+                            <InputField divname="box" type="text" className="text" fieldValue={state.join_date} id="empdate" placeHolder={"Joining Date"} label={"joining Date"} onchange ={(value) => onChangeValue("join_date", value)} />
                     
-                            <InputSelect divname="box" label={'Role'}  options={roleSelection}  onchange ={(value) => onChangeValue("emprole", value)}  /> 
+                            <InputSelect divname="box" label={'Role'}  options={roleSelection}  onchange ={(value) => onChangeValue("role", value)}  /> 
 
                         {/* <div className="box">onChangeonChange
                             <label for="role">Role</label><br/>
@@ -107,7 +135,7 @@ const CreateEmployee = () => {
                             </select>
                         </div> */}
              
-                            <InputSelect divname="box" label={'Status'} id="empstatus" options={statusSelection}  onchange={(value) => onChangeValue("empstatus", value)}/> 
+                            <InputSelect divname="box" label={'Status'} id="empstatus" options={statusSelection}  onchange={(value) => onChangeValue("status", value)}/> 
                  
                         {/* <div className="box">
                             <label for="status">Status</label><br/>
@@ -123,20 +151,20 @@ const CreateEmployee = () => {
                             {/* <label for="experience">Experience</label><br/>
                             <input className="text" type="text" id="exp" placeholder="Experience"/> */}
                
-                            <InputField type="text" className="text" divname="box" fieldValue={state.empexp} id="empexp" placeHolder={"Experience"} label="Experience" onchange ={(value) => onChangeValue("empexp", value)} />
+                            <InputField divname="box" type="text" className="text" fieldValue={state.experience} id="empexp" placeHolder={"Experience"} label="Experience" onchange ={(value) => onChangeValue("experience", value)} />
                
 
                             {/* <label for="address">Address</label><br/>
                             <input className="text" type="text" id="empname" placeholder="Address"/> */}
                  
                             
-                            <InputField type="text" className="text" divname="box" fieldValue={state.empaddress1} id="empaddress1" placeHolder={"Address Lane 1"} label="Address Lane 1" onchange ={(value) => onChangeValue("empaddress1", value)} />
-                            <InputField type="text" className="text" divname="box" fieldValue={state.empaddress2} id="empaddress2" placeHolder={"Address Lane 2"} label={"Address Lane 2"} onchange ={(value) => onChangeValue( "empaddress2", value)}/>
+                            <InputField divname="box" type="text" className="text" fieldValue={state?.ddressLane1} id="empaddress1" placeHolder={"Addresslane 1"} label="Addresslane 1" onchange ={(value) => onChangeValue("addressLane1", value)} />
+                            <InputField divname="box" type="text" fieldValue={state?.addressLane2} id="empaddress1" placeHolder={"Addresslane 2"} label={"Addresslane 2"} onchange ={(value) => onChangeValue( "addressLane2", value)}/>
 
-                            <InputField type="text" className="text" divname="box" fieldValue={state.city} id="empaddress1" placeHolder={"City"} label="City" onchange ={(value) => onChangeValue("city", value)} />
-                            <InputField type="text" divname="box" fieldValue={state.state} id="empaddress1" placeHolder={"State"} label={"State"} onchange ={(value) => onChangeValue( "state", value)}/>
-                            <InputField type="text" className="text" divname="box" fieldValue={state.country} id="country" placeHolder={"Country"} label="Country" onchange ={(value) => onChangeValue("country", value)} />
-                            <InputField type="text" divname="box" fieldValue={state.zipcode} id="zipcode" placeHolder={"Zipcode"} label={"Zipcode"} onchange ={(value) => onChangeValue( "zipcode", value)}/>
+                            <InputField divname="box" type="text" className="text" fieldValue={state?.city} id="empaddress1" placeHolder={"City"} label="City" onchange ={(value) => onChangeValue("city", value)} />
+                            <InputField divname="box" type="text" fieldValue={state?.state} id="empaddress1" placeHolder={"State"} label={"State"} onchange ={(value) => onChangeValue( "state", value)}/>
+                            <InputField divname="box" type="text" className="text" fieldValue={state?.country} id="coumtry" placeHolder={"Country"} label="Country" onchange ={(value) => onChangeValue("country", value)} />
+                            <InputField divname="box" type="text" fieldValue={state?.zipcode} id="zipcode" placeHolder={"Zipcode"} label={"Zipcode"} onchange ={(value) => onChangeValue( "zipcode", value)}/>
                             
                         <div className="box">
                         <label> Id</label>
@@ -154,23 +182,23 @@ const CreateEmployee = () => {
 
                         </div>
                         <div className="box1">
-                        <input type="submit" className="buttons" id="b1" value="Create" onClick={() => createEmp({
-                            name: state.empname,
-                            id: state.empid,
-                            join_date: state.empdate,
-                            role: state.emprole,
-                            status: state.empstatus,
-                            experience: Number(state.empexp),
+                        <input type="submit" className="buttons" id="b1" value="Update" onClick={() => updateEmp({
+                            name: state.name,
+                            id: id,
+                            join_date: state.join_date,
+                            role: state.role,
+                            status: state.status,
+                            experience: Number(state.experience),
                             username : "neelima542",
                             passsword : "nee542",
                             departmentId : "c7b15c07-6b4f-4546-878f-b8ccf78a6aef",
                             address : {
-                                addressLane1: state.empaddress1,
-                                addressLane2: state.empaddress2,
-                                city: state.city,
-                                state: state.state,
-                                country: state.country,
-                                pincode: state.zipcode
+                                addressLane1: state.address.addressLane1,
+                                addressLane2: state.address.addressLane2,
+                                city: state.address.city,
+                                state: state.address.state,
+                                country: state.address.country,
+                                pincode: state.address.pincode
                             }
                         })}/>
                         <input type="submit" className="buttons" id="b2" value="Cancel"/>
@@ -190,6 +218,6 @@ const CreateEmployee = () => {
 
 }
 
-export default CreateEmployee;
+export default UpdateEmployee;
 
 

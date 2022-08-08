@@ -1,0 +1,67 @@
+.maindiv1 {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.subdiv1 {
+    height: 100vh;
+    width: 50%;
+    background-color: #EAF9FF;
+    text-align: center;
+    padding: 100px 0px 100px 0px;
+}
+
+.subdiv2 {
+    width: 50%;
+    text-align: center;
+    padding-top: 300px;
+}
+
+
+.imgbox {
+    width: 50% !important;
+    padding: 0px 50px 0 50px;
+    margin: 0px 0px 0px 120px;
+}
+
+.pass{
+    width: 100%;
+    height: 50px ;
+    border: 1px solid #B4B7BD;
+    border-radius: 5px;
+    opacity: 1;
+    background-color: #ffffff !important;
+    padding-left: 10px;
+    
+}
+
+.text1 {
+    width: 100%;
+    height: 50px ;
+    border: 1px solid #B4B7BD;
+    border-radius: 5px; 
+    opacity: 1;
+    background-color: #ffffff !important;
+    padding-left: 10px;
+    margin-bottom: 0px;
+}
+
+.loginbtn {
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+    
+    background-color: #03AEEE;
+    border-radius: 3px;
+    color: #FFFFFF;
+    box-shadow: 0px 3px 6px #B0E6FA;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.textbox {
+    width: 50%;
+    margin-left: 250px;
+}
